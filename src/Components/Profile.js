@@ -20,7 +20,12 @@ class Profile extends Component {
       return(
         <section className="github-profile">
           <div className="github-profile-info">
-            <h3>{userdata.name}</h3>
+            <h3>{userdata.username}</h3>
+            <h3>{userdata.reponame}</h3>
+            <h3>{userdata.stars}</h3>
+            <h3>{userdata.score}</h3>
+            <h3>{userdata.language}</h3>
+            <h3>{userdata.description}</h3>
           </div>
         </section>
       );

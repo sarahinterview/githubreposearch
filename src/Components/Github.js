@@ -9,42 +9,37 @@ class Github extends Component {
     super(props);
 
     this.state = {
-      username: 'Github',
-      reponame: '',
-      description: '',
-      stars: '',
-      score: '',
-      language: ''
+      repo:[]
     };
   }
 
-  getProfile(searchterm){
+  getRepos(searchterm){
     let finalURL = `${API}/${searchterm}`;
     fetch(finalURL)
     .then((res) => res.json() )
     .then((data) => {
       console.log(data);
       this.setState({
-        username: data.index.owner.login,
-        reponame: data.index.name,
-        description:data.index.description,
-        stars: data.index.stargazers_count,
-        score: data.index.score,
-        language: data.index.language
+        username: data.items[1].owner.login,
+        reponame: data.items[1].name,
+        description:data.items[1].description,
+        stars: data.items[1].stargazers_count,
+        score: data.items[1].score,
+        language: data.items[1].language
       })
     })
     .catch((error) => console.log('Unable to fetch data'))
   }
 
   componentDidMount(){
-    this.getProfile(this.state.searchterm);
+    this.getRepos(this.state.searchterm);
   }
 
   render(){
     return(
       <div>
         <section id="card">
-          <Search searchProfile={this.getProfile.bind(this)} />
+          <Search searchProfile={this.getRepos.bind(this)} />
           <Profile userData={this.state}/>
         </section>
       </div>
