@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './Profile.css';
 
 
 
@@ -20,12 +21,12 @@ class Profile extends Component {
       return(
         <section className="github-profile">
           <div className="github-profile-info">
-            <h3>{userdata.username}</h3>
-            <h3>{userdata.reponame}</h3>
-            <h3>{userdata.stars}</h3>
-            <h3>{userdata.score}</h3>
-            <h3>{userdata.language}</h3>
-            <h3>{userdata.description}</h3>
+            <h3>{`Username: ${userdata.username}`}</h3>
+            <h3>{`Repo Name: ${userdata.reponame}`}</h3>
+            <h3>{`Stars: ${userdata.stars}`}</h3>
+            <h3>{`Score: ${userdata.score}`}</h3>
+            <h3>{`Language: ${userdata.language}`}</h3>
+            <h3>{`Description: ${userdata.description}`}</h3>
           </div>
         </section>
       );
