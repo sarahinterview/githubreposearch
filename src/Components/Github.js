@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Profile from './Profile';
+import Profile from './Profile/Profile';
 import Search from './Search';
 
 const API = 'https://api.github.com/search/repositories?q='
@@ -9,7 +9,7 @@ class Github extends Component {
     super(props);
 
     this.state = {
-      repo:[]
+      repos:[]
     };
   }
 
@@ -20,15 +20,18 @@ class Github extends Component {
     .then((data) => {
       console.log(data);
       this.setState({
-        username: data.items[1].owner.login,
-        reponame: data.items[1].name,
-        description:data.items[1].description,
-        stars: data.items[1].stargazers_count,
-        score: data.items[1].score,
-        language: data.items[1].language
+      repos: data.items
       })
     })
     .catch((error) => console.log('Unable to fetch data'))
+  }
+
+  renderProfiles() {
+    return this.state.repos.map(repo =>
+      <section id="card">
+        <Profile userData={repo}/>
+      </section>
+    );
   }
 
   componentDidMount(){
@@ -38,10 +41,8 @@ class Github extends Component {
   render(){
     return(
       <div>
-        <section id="card">
-          <Search searchProfile={this.getRepos.bind(this)} />
-          <Profile userData={this.state}/>
-        </section>
+      <Search searchProfile={this.getRepos.bind(this)} />
+        {this.renderProfiles()}
       </div>
     );
   }
